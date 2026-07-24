@@ -64,10 +64,21 @@
             height: 70px;
         }
 
-        .logo {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-color);
+        .logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .nav-logo-img {
+            height: 50px; /* Adjust height to fit comfortably inside the 70px navbar */
+            width: auto;  /* Maintains original aspect ratio */
+            object-fit: contain;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-logo-img:hover {
+            transform: scale(1.05); /* Optional subtle hover effect */
         }
 
         .nav-links {
@@ -292,7 +303,9 @@
     <!-- Navigation -->
     <nav>
         <div class="container nav-container">
-            <div class="logo">&lt;DevPortfolio /&gt;</div>
+            <a href="#about" class="logo-link">
+                <img src="assets/logo.png" alt="Developer AI Journey Logo" class="nav-logo-img">
+            </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#skills">Skills</a></li>
