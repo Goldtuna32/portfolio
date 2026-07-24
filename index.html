@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #38bdf8;
+            --accent-hover: #0284c7;
+            --border-color: #334155;
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Container & Layout */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+
+        .hero h2 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin-bottom: 30px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            color: #ffffff;
+        }
+
+        .btn-secondary {
+            border-color: var(--border-color);
+            color: var(--text-color);
+            background-color: var(--card-bg);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin-top: 8px;
+            border-radius: 2px;
+        }
+
+        /* Tech Stack Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-card {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .skill-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background-color: #0f172a;
+            color: var(--accent-color);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-bullets {
+            list-style: disc inside;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .project-bullets li {
+            margin-bottom: 8px;
+        }
+
+        /* Education */
+        .edu-item {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            margin-bottom: 15px;
+        }
+
+        .edu-item h3 {
+            font-size: 1.2rem;
+        }
+
+        .edu-item p {
+            color: var(--text-muted);
+        }
+
+        /* Contact & Footer */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero h2 { font-size: 1.2rem; }
+            .nav-links { display: none; } /* Simplified for single page mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">&lt;DevPortfolio /&gt;</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero" id="about">
+            <h1>Hi, I'm <span style="color: var(--accent-color);">Min Khant Zaw</span></h1>
+            <h2>Software Developer | Cross-Platform Mobile & Backend Specialist</h2>
+            <p>
+                I build high-performance, offline-first mobile applications and scalable backend APIs. 
+                Specialized in Flutter, Dart, C#, Node.js, and Python with a focus on clean architecture and efficient state management.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </header>
+
+        <!-- Tech Stack Section -->
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Mobile Dev</h3>
+                    <p>Flutter, Dart, Riverpod, Provider, Geolocation, Tile Caching, Hardware IR Integrations</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Backend & APIs</h3>
+                    <p>C# ASP.NET Core, Node.js (Express), Python (Django), RESTful APIs</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Databases</h3>
+                    <p>SQLite, PostgreSQL, Firebase / Firestore</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Tools & Patterns</h3>
+                    <p>Git, GitHub, Postman, Clean Architecture, Repository Pattern</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="project-card">
+                    <h3 class="project-title">Offline-First Location & Fuel Tracking System</h3>
+                    <div class="tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Dart</span>
+                        <span class="tag">SQLite</span>
+                        <span class="tag">Tile Caching</span>
+                        <span class="tag">Flutter Map</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Engineered an offline-first tracking application featuring tile caching and local storage to capture GPS data during signal loss.</li>
+                        <li>Implemented background location processing and offline map rendering with zero data loss.</li>
+                        <li>Optimized background location polling, reducing battery draw by 25%.</li>
+                    </ul>
+                    <a href="https://github.com/Goldtuna32/fuel_tracker" target="_blank" class="btn btn-secondary">View Code on GitHub &rarr;</a>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card">
+                    <h3 class="project-title">Smart IR & Wi-Fi Remote Control System</h3>
+                    <div class="tags">
+                        <span class="tag">Flutter</span>
+                        <span class="tag">Riverpod</span>
+                        <span class="tag">Local Repositories</span>
+                        <span class="tag">Wi-Fi Discovery</span>
+                    </div>
+                    <ul class="project-bullets">
+                        <li>Developed a universal remote control mobile app using Riverpod state management to handle hardware IR transmission and device discovery.</li>
+                        <li>Architected a hybrid local/cloud repository layer that reduced IR response latency to under 50ms.</li>
+                        <li>Integrated dynamic device pairing supporting hundreds of TV and AC code sets.</li>
+                    </ul>
+                    <a href="https://github.com/Goldtuna32/Mobile-Remote-Control-Apk" target="_blank" class="btn btn-secondary">View Code on GitHub &rarr;</a>
+                </div>
+
+               
+
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education">
+            <h2 class="section-title">Education & Training</h2>
+            <div class="edu-item">
+                <h3>High School Equivalency Diploma</h3>
+                <p>Focus on Advanced Mathematics (Linear Algebra, Calculus, Statistics, Probability)</p>
+            </div>
+            <div class="edu-item">
+                <h3>Cross-Platform Mobile Development Certification</h3>
+                <p>Focused on Flutter, Dart, Riverpod State Management, and Offline Storage Architecture</p>
+            </div>
+            <div class="edu-item">
+                <h3>Backend API Engineering Specialization</h3>
+                <p>Coursework in C# ASP.NET Core, Node.js/Express, and RESTful Web Services</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="contact-content">
+                <h2 class="section-title" style="display:inline-block;">Let's Connect</h2>
+                <p>I am actively seeking remote entry-level software engineering opportunities. Feel free to reach out via email or connect on social platforms!</p>
+                <div class="cta-buttons" style="justify-content: center;">
+                    <a href="mailto:minzaw186166@gmail.com" class="btn btn-primary">Email Me</a>
+                    <a href="https://github.com/Goldtuna32" target="_blank" class="btn btn-secondary">GitHub</a>
+                    <a href="https://linkedin.com/in/min-khant-zaw-57257a3a7/" target="_blank" class="btn btn-secondary">LinkedIn</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 [Your Name]. Built with HTML & CSS.</p>
+        </div>
+    </footer>
+
+</body>
+</html>
